@@ -2,7 +2,7 @@ const amqp = require('amqplib');
 const mqtt = require('mqtt');
 const { parsePayload } = require("../../parser");
 
-const startProducer = async () => {
+const startProducer = async (req, res) => {
     const rmqConn = await amqp.connect("amqp://localhost");
     const channel = await rmqConn.createChannel();
 
@@ -38,11 +38,16 @@ const startProducer = async () => {
                 { persistent: true}
             );
 
-            
+            console.log(`[-> RMQ] ${parsed.deviceId} | power: ${parsed.power.value}% | key: ${routingKey} | devices: ${parsed.devices.length}` )
 
         }catch(error){
 
+            console.log("producer API Error: ",error.message);
         }
     })
-
+    mqttClient.on('error', (err) => {
+            console.error('MQTT error:', err)
+    })
 }
+
+startProducer().catch(console.error)
