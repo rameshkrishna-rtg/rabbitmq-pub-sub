@@ -31,7 +31,8 @@ const setup = async () => {
             message: "Internal error message"
         })
     }
+}
 
-
-
+module.exports = {
+    setup
 }
