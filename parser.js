@@ -1,7 +1,7 @@
 const { time } = require("node:console");
 const { parse } = require("node:path");
 
-function parsePayload(topic, rawPayload) {
+export function parsePayload(topic, rawPayload) {
 
     const parts = rawPayload.toString().trim().split(',');
 
@@ -66,6 +66,3 @@ function parsePayload(topic, rawPayload) {
 
 }
 
-module.exports = (
-    parsePayload
-)
