@@ -1,3 +1,6 @@
+const { time } = require("node:console");
+const { parse } = require("node:path");
+
 function parsePayload(topic, rawPayload) {
 
     const parts = rawPayload.toString().trim().split(',');
@@ -40,11 +43,29 @@ function parsePayload(topic, rawPayload) {
 
         devices.push({
             raw: entry,
-            
-        })
-
-
+            prefix,
+            index,
+            name: segs[1],
+            status: parseInt(segs[2]),
+            value: parseInt(segs[3]),
+            type: segs[4],
+            code: segs[5],
+            isOn: parseInt(segs[2]) === 1 
+        });
     }
 
+    return {
+        topic,
+        deviceId,
+        timestamp,
+        power,
+        security,
+        devices,
+        receivedAt: new Date().toISOString()
+    };
 
 }
+
+module.exports = (
+    parsePayload
+)
