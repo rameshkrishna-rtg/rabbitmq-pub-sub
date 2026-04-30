@@ -1,6 +1,3 @@
-
-
-
 const { time } = require("node:console");
 const { parse } = require("node:path");
 export function parsePayload(topic, rawPayload) {
