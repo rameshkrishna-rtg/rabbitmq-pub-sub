@@ -1,4 +1,15 @@
 
+
+
+const { time } = require("node:console");
+const { parse } = require("node:path");
+export function parsePayload(topic, rawPayload) {
+
+    const parts = rawPayload.toString().trim().split(',');
+
+    const deviceId = parts[1]?.trim();
+    const timestamp = parts[2]?.trim();
+
     const powerRaw = parts[3]?.trim();
     const powerParts = powerRaw.split("_");
 
